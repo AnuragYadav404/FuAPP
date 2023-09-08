@@ -10,11 +10,16 @@ const server = http.createServer((req, res) => {
   //   console.log(fileName);
   // filenames can be:
   // 1. /
-  fileName = fileName == "/" ? "index.html" : fileName;
+  if (fileName == "/") {
+    res.writeHead(301, { Location: "index.html" });
+    res.end();
+  }
 
   let filePath = path.join(__dirname, "dist");
   let extName = path.extname(fileName);
   let contentType = "null";
+
+  // if()
 
   if (extName == ".html") {
     contentType = "text/html";
